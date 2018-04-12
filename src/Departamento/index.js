@@ -47,10 +47,9 @@ export default class Departamentos extends React.Component {
           {this.state.dataSource.map((item,key)=>(
           <Picker.Item label={item.nombre} value={item.id} key={key} />)
             )}  
-        </Picker>
-        
-
+        </Picker>  
       </View>
     );
   }
 }
+});

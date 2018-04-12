@@ -56,9 +56,4 @@ export default class LocalParto extends React.Component {
 }
 
 
-
-
-
-
-
 });

@@ -2,6 +2,15 @@ import React from 'react';
 import { Switch,ScrollView,TextInput,StyleSheet,Picker, ActivityIndicator, Text, View  } from 'react-native';
 
 import AreaGeografica from './src/AreaGeografica/';
+import Departamento from './src/Departamento/';
+import Establecimiento from './src/Establecimiento/';
+import LocalParto from './src/LocalParto/';
+import Municipio from './src/Municipio/';
+import Pais from './src/Pais/';
+import Sexo from './src/Sexo';
+import TipoDocumento from './src/TipoDocumento';
+import TipoParto from './src/TipoParto';
+
 
 export default class FetchExample extends React.Component {
 
@@ -56,6 +65,7 @@ export default class FetchExample extends React.Component {
           <Picker.Item label={item.nombre} value={item.id} key={key} />)
             )}  
         </Picker>
+        <LocalParto/>
         <Text style={styles.picker}>Comunitario asistido por</Text>
         <Picker style={styles.picker} ></Picker>
         <Text style={styles.text3}>Expediente de la madre</Text>
@@ -97,7 +107,13 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text2}>Via de Evacuacion</Text>
         <Picker style={styles.textb} ></Picker>
         <Text style={styles.text4}>Clase de Parto</Text>
-        <Picker style={styles.textb} ></Picker>
+        <Picker style={styles.picker} 
+          selectedValue={this.state.mode}
+          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
+          {this.state.dataSource.map((item,key)=>(
+          <Picker.Item label={item.nombre} value={item.id} key={key} />)
+            )}  ></Picker>
+            <TipoParto/>
         <Text style={styles.text5}>Aplicacion de Vacuna:</Text>
         <Text style={styles.text2}>BCG</Text>
         <Switch/>
@@ -137,7 +153,13 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text3}>Direccion</Text>
         <TextInput multiline = {true} numberOfLines = {4} style={styles.textA}/>
         <Text style={styles.text3}>Depto/Municipio</Text>
-        <Picker style={styles.textb} ></Picker>
+        <Picker style={styles.picker} 
+          selectedValue={this.state.mode}
+          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
+          {this.state.dataSource.map((item,key)=>(
+          <Picker.Item label={item.nombre} value={item.id} key={key} />)
+            )}  ></Picker>
+            <Departamento/>
         <Picker style={styles.textb} ></Picker>
         <Text style={styles.text3}>Canton</Text>
         <Picker style={styles.textb} ></Picker>
@@ -152,7 +174,13 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text4}>Fecha</Text>
         <TextInput style={styles.textb}/>
         <Text style={styles.text3}>Tipo Documento</Text>
-        <Picker style={styles.textb} ></Picker>
+        <Picker style={styles.picker} 
+          selectedValue={this.state.mode}
+          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
+          {this.state.dataSource.map((item,key)=>(
+          <Picker.Item label={item.nombre} value={item.id} key={key} />)
+            )} ></Picker>
+            <TipoDocumento/>
         <Text style={styles.text4}>Numero (sin guiones)</Text>
         </ScrollView>
       </View>

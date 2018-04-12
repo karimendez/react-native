@@ -26,8 +26,6 @@ export default class Sexos extends React.Component {
       });
   }
 
-
-
   render(){
 
     if(this.state.isLoading){
@@ -54,11 +52,4 @@ export default class Sexos extends React.Component {
     );
   }
 }
-
-
-
-
-
-
-
 });

@@ -56,9 +56,4 @@ export default class Establecimientos extends React.Component {
 }
 
 
-
-
-
-
-
 });
