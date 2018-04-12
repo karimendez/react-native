@@ -54,11 +54,3 @@ export default class Departamentos extends React.Component {
     );
   }
 }
-
-
-
-
-
-
-
-});
