@@ -1,5 +1,8 @@
 import React from 'react';
-import { Switch,ScrollView,TextInput,StyleSheet,Picker, ActivityIndicator, Text, View  } from 'react-native';
+import { Switch,ScrollView,TextInput,StyleSheet,Picker, ActivityIndicator, Text, View,Button,Alert } from 'react-native';
+import DatePicker from 'react-native-datepicker';
+import ToggleSwitch from 'toggle-switch-react-native';
+
 
 import AreaGeografica from './src/AreaGeografica/';
 import Departamento from './src/Departamento/';
@@ -14,9 +17,13 @@ import TipoParto from './src/TipoParto';
 
 export default class FetchExample extends React.Component {
 
+	_onPress() {
+  Alert.alert('Consumiendo API!');
+ }
+
   constructor(props){
     super(props);
-    this.state ={ isLoading: true}
+    this.state ={ isLoading: true, datetime: ''}
   }
 
   componentDidMount(){
@@ -37,6 +44,8 @@ export default class FetchExample extends React.Component {
       });
   }
 
+    
+
 
 
   render(){
@@ -53,18 +62,17 @@ export default class FetchExample extends React.Component {
       <View style={styles.container}>
       <ScrollView>
         <Text style={styles.picker}>Establecimiento: </Text>
-        <Picker style={styles.picker} ></Picker>
-        <AreaGeografica/>
-        <Text style={styles.picker}>Fosalud</Text>
-        <Switch/>
+        <Establecimiento/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Fosalud'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.picker}>Local Parto</Text>
-        <Picker style={styles.picker} 
-          selectedValue={this.state.mode}
-          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
-          {this.state.dataSource.map((item,key)=>(
-          <Picker.Item label={item.nombre} value={item.id} key={key} />)
-            )}  
-        </Picker>
         <LocalParto/>
         <Text style={styles.picker}>Comunitario asistido por</Text>
         <Picker style={styles.picker} ></Picker>
@@ -82,20 +90,35 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text2}>Apellidos</Text>
         <TextInput style={styles.textb}/>
         <Text style={styles.text2}>Sexo</Text>
-        <Switch />
+        <Sexo/>
         <Text style={styles.text2}>Nacimiento</Text>
         <Text style={styles.text4}>Digitar la Fecha de Nacimiento hasta
         estar completamente seguro de la informacion, ya que el Codigo Unico
         sera generado a partir de este campo, por lo tanto,
         una vez registrado el nacimiento no sera posible modificar esa fecha,
         ni tampoco eliminarlo</Text>
-        <Text style={styles.text4}>Fecha</Text>
-        <TextInput style={styles.textb}/>
-        <Text style={styles.text4}>Hora</Text>
-        <Picker style={styles.textb} ></Picker>
-        <Text style={styles.text4}>hrs</Text>
-        <Picker style={styles.textb} ></Picker>
-        <Text style={styles.text4}>min</Text>
+        <Text style={styles.textb}>fecha: {this.state.datetime}</Text>
+        <DatePicker
+          style={{width: 200}}
+          date={this.state.datetime}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          minuteInterval={10}
+          onDateChange={(datetime) => {this.setState({datetime: datetime});}}
+        />
         <Text style={styles.text2}>Peso (gr)</Text>
         <TextInput style={styles.textb}/>
         <Text style={styles.text4}>Longitud (cm)</Text>
@@ -107,40 +130,104 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text2}>Via de Evacuacion</Text>
         <Picker style={styles.textb} ></Picker>
         <Text style={styles.text4}>Clase de Parto</Text>
-        <Picker style={styles.picker} 
-          selectedValue={this.state.mode}
-          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
-          {this.state.dataSource.map((item,key)=>(
-          <Picker.Item label={item.nombre} value={item.id} key={key} />)
-            )}  ></Picker>
-            <TipoParto/>
+        <TipoParto/>
         <Text style={styles.text5}>Aplicacion de Vacuna:</Text>
-        <Text style={styles.text2}>BCG</Text>
-        <Switch/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='BCG'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.text3}>Fecha</Text>
         <TextInput style={styles.textb}/>        
         <Text style={styles.text2}>No se vacuno debido a</Text>
-        <Text style={styles.text4}>Bajo Peso</Text>
-        <Switch/>
-        <Text style={styles.text4}>Morbilidad</Text>
-        <Switch/>
-        <Text style={styles.text4}>Expuesto Perinatalmente</Text>
-        <Switch/>
-        <Text style={styles.text4}>Desabastecimiento</Text>
-        <Switch/>
-        <Text style={styles.text4}>Fallecio</Text>
-        <Switch/>
-        <Text style={styles.text2}>Hepatitis B</Text>
-        <Switch/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Bajo Peso'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Morbilidad'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Expuesto Perinatalmente'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Desabastecimiento'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Fallecio'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Hepatitis B'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.text4}>Fecha</Text>
         <TextInput style={styles.textb}/> 
         <Text style={styles.text2}>No se vacuno debido a</Text>
-        <Text style={styles.text4}>Morbilidad</Text>
-        <Switch/>
-        <Text style={styles.text4}>Desabastecimiento</Text>
-        <Switch/>
-        <Text style={styles.text4}>Fallecio</Text>
-        <Switch/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Morbilidad'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Desabastecimiento'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Fallecio'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.text2}>Retorno</Text>
         <Picker style={styles.textb} ></Picker>
         <Text style={styles.text5}>Informacion de la Madre:</Text>
@@ -153,39 +240,53 @@ export default class FetchExample extends React.Component {
         <Text style={styles.text3}>Direccion</Text>
         <TextInput multiline = {true} numberOfLines = {4} style={styles.textA}/>
         <Text style={styles.text3}>Depto/Municipio</Text>
-        <Picker style={styles.picker} 
-          selectedValue={this.state.mode}
-          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
-          {this.state.dataSource.map((item,key)=>(
-          <Picker.Item label={item.nombre} value={item.id} key={key} />)
-            )}  ></Picker>
-            <Departamento/>
-        <Picker style={styles.textb} ></Picker>
+        <Departamento/>
+        <Municipio/>
         <Text style={styles.text3}>Canton</Text>
         <Picker style={styles.textb} ></Picker>
-        <Text style={styles.text4}>Area</Text>
-        <Switch/>
-        <Text style={styles.text3}>Aplicacion Vacuna Tdpa</Text>
-        <Switch/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Area'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Aplicacion Vacuna Tdpa'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.text4}>Fecha</Text>
         <TextInput style={styles.textb}/>
-        <Text style={styles.text4}>Aplicacion Vacuna Influenza</Text>
-        <Switch/>
+        <ToggleSwitch style={styles.switch}
+		    isOn={false}
+		    onColor='green'
+		    offColor='red'
+		    label='Aplicacion Vacuna Influenza'
+		    labelStyle={{color: '#87ceeb', fontWeight: '900'}}
+		    size='large'
+		    onToggle={ (isOn) => console.log('changed to : ', isOn) }
+		/>
         <Text style={styles.text4}>Fecha</Text>
         <TextInput style={styles.textb}/>
         <Text style={styles.text3}>Tipo Documento</Text>
-        <Picker style={styles.picker} 
-          selectedValue={this.state.mode}
-          onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
-          {this.state.dataSource.map((item,key)=>(
-          <Picker.Item label={item.nombre} value={item.id} key={key} />)
-            )} ></Picker>
-            <TipoDocumento/>
+        <TipoDocumento/>
         <Text style={styles.text4}>Numero (sin guiones)</Text>
+        <TextInput style={styles.textb}/>        
+        <Button  onPress={this._onPress} title="Grabar" color="#000000" accessibilityLabel="Tap on Me"/>
+        
         </ScrollView>
       </View>
     );
   }
+
+    
 }
 
 const styles =StyleSheet.create({
@@ -231,8 +332,9 @@ const styles =StyleSheet.create({
       backgroundColor: '#ffffff'
     },
     button : {
-
-
+    },
+    switch : {
+    	backgroundColor : '#ffffff'
     }
 
 });

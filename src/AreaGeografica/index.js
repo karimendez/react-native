@@ -39,8 +39,8 @@ export default class FetchExample extends React.Component {
     }
 
     return(
-      <View>
-        <Picker style={styles.picker} 
+      <View >
+        <Picker  style={styles.picker}
           selectedValue={this.state.mode}
           onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
           {this.state.dataSource.map((item,key)=>(
@@ -53,50 +53,9 @@ export default class FetchExample extends React.Component {
 }
 
 const styles =StyleSheet.create({
-    container : {
-      backgroundColor : '#003063',
-    },
-    picker : {
-      backgroundColor : '#cccc99',
-      color: '#000000'
-    },
-    text : {
-      color: '#ffffff',
-      fontWeight: 'bold'
-    },
-    textInput : {
-
-    },
-    text2 : {
-      backgroundColor : '#ffcc66',
-      color: '#000000'
-    },
-    text3 : {
-      backgroundColor : '#CC9999',
-      color: '#000000'
-    },
-    text4 : {
-      backgroundColor : '#cccccc',
-      color :'#000000'
-    },
-    textb : {
+       picker : {
       backgroundColor : '#ffffff',
-      color :'#000000'
-    },
-    text5 : {
-      backgroundColor : '#003063',
-      color :'#ffffff'
-    },
-    textA : {
-      height : 80,
-      borderColor: '#cccccc',
-      borderWidth: 1,
-      color: '#000000',
-      backgroundColor: '#ffffff'
-    },
-    button : {
-
-
-    }
+      color: '#000000'
+      }
 
 });

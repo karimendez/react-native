@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput,StyleSheet,Picker,ListView, TouchableOpacity, FlatList, ActivityIndicator, Text, View  } from 'react-native';
+import { Picker,StyleSheet,FlatList, ActivityIndicator, Text, View  } from 'react-native';
 
 export default class TipoDocumentos extends React.Component {
 
@@ -39,9 +39,9 @@ export default class TipoDocumentos extends React.Component {
     }
 
     return(
-      <View >
+      <View>
         
-        <Picker  
+        <Picker  style={styles.picker} 
           selectedValue={this.state.mode}
           onValueChange={(modeValue, modeIndex) => this.setState({mode: modeValue})}>
           {this.state.dataSource.map((item,key)=>(
@@ -56,7 +56,11 @@ export default class TipoDocumentos extends React.Component {
 }
 
 
-
+const styles =StyleSheet.create({
+       picker : {
+      backgroundColor : '#ffffff',
+      color: '#000000'
+      }
 
 
 
