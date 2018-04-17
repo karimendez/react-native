@@ -334,7 +334,8 @@ const styles =StyleSheet.create({
     button : {
     },
     switch : {
-    	backgroundColor : '#ffffff'
+    	backgroundColor : '#ffffff',
+      textAlign: 'right'
     }
 
 });
